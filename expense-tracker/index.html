@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Expense Tracker</title>
+
+    <!-- ✅ Correct CSS path -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="app-header">
+        <div class="header-inner">
+            <div class="logo">
+                <span class="logo-icon">💰</span>
+                <span class="logo-text">SmartTracker</span>
+            </div>
+
+            <!-- ✅ JS uses clearAll() -->
+            <button class="btn-clear" onclick="clearAll()">🗑 Clear All</button>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <!-- SUMMARY -->
+        <section class="summary-grid">
+            <div class="card summary-card income-card">
+                <p class="card-label">Total Income</p>
+                <p class="card-value" id="totalIncome">₹0.00</p>
+            </div>
+
+            <div class="card summary-card expense-card">
+                <p class="card-label">Total Expenses</p>
+                <p class="card-value" id="totalExpense">₹0.00</p>
+            </div>
+
+            <div class="card summary-card balance-card">
+                <p class="card-label">Net Balance</p>
+                <p class="card-value positive" id="netBalance">₹0.00</p>
+            </div>
+        </section>
+
+        <!-- FORM -->
+        <section class="card form-section">
+            <h2 class="section-title">Add Transaction</h2>
+
+            <div class="form-grid">
+
+                <div class="form-group full-width">
+                    <label>Description</label>
+                    <input type="text" id="desc" placeholder="e.g. Salary, Grocery">
+                </div>
+
+                <div class="form-group">
+                    <label>Amount</label>
+                    <input type="number" id="amount" min="1" placeholder="0.00">
+                </div>
+
+                <div class="form-group">
+                    <label>Date</label>
+                    <!-- ✅ MUST MATCH JS -->
+                    <input type="date" id="txnDate">
+                </div>
+
+                <div class="form-group">
+                    <label>Category</label>
+                    <select id="category">
+                        <option value="Salary">💼 Salary</option>
+                        <option value="Freelance">💻 Freelance</option>
+                        <option value="Investment">📈 Investment</option>
+                        <option value="Food">🍔 Food</option>
+                        <option value="Transport">🚗 Transport</option>
+                        <option value="Shopping">🛍️ Shopping</option>
+                        <option value="Health">💊 Health</option>
+                        <option value="Entertainment">🎬 Entertainment</option>
+                        <option value="Bills">🧾 Bills</option>
+                        <option value="Education">📚 Education</option>
+                        <option value="Other">🗂️ Other</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <!-- ✅ REQUIRED BUTTONS -->
+            <div class="btn-row">
+                <button class="btn btn-income" onclick="addTransaction('income')">
+                    + Add Income
+                </button>
+
+                <button class="btn btn-expense" onclick="addTransaction('expense')">
+                    − Add Expense
+                </button>
+            </div>
+
+        </section>
+
+        <!-- TRANSACTIONS -->
+        <section class="card txn-section">
+            <div class="txn-header">
+                <h2 class="section-title">Transaction History</h2>
+
+                <!-- ✅ MUST MATCH JS -->
+                <input type="text" id="searchBox" placeholder="🔍 Search..." class="search-input"
+                    oninput="renderTransactions()">
+            </div>
+
+            <!-- ✅ MUST MATCH JS -->
+            <div id="txnList" class="txn-list">
+                <p class="empty-msg">No transactions yet.</p>
+            </div>
+        </section>
+
+        <!-- CHART -->
+        <section class="card chart-section">
+            <div class="chart-header">
+                <h2 class="section-title">Monthly Overview</h2>
+
+                <div class="legend">
+                    <span class="legend-item income-dot">Income</span>
+                    <span class="legend-item expense-dot">Expenses</span>
+                </div>
+            </div>
+
+            <div class="chart-wrapper">
+                <!-- ✅ MUST MATCH JS -->
+                <canvas id="monthChart"></canvas>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ✅ REQUIRED FOR TOAST -->
+    <div id="toast" class="toast"></div>
+
+    <!-- ✅ Correct JS path -->
+    <script src="js/script.js"></script>
+
+</body>
+
+</html>
